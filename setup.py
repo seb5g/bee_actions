@@ -12,13 +12,19 @@ except ImportError:
 
 from beeactions.version import get_version
 
+long_description = """BeeActions is a tool to help analyse actions performed by animals
+(Bees for instance) and record the time when one of the registered
+actions are done. A set of configurable shortcuts is used for quick
+registration of the actions while a chronometer register the elapsed time
+since the start of the acquisition"""
+
 with open('README.rst') as fd:
     long_description = fd.read()
 
 setupOpts = dict(
     name='beeactions',
     description='Bee Behaviour Temporal Analysis',
-    long_description=long_description,
+    long_description='',
     license='CECILL-B',
     url='',
     author='Sébastien Weber',

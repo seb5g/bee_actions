@@ -148,7 +148,7 @@ class BeeActions(QObject):
                 if param.name() in custom_tree.iter_children(self.settings.child(('shortcuts')), []):
                     if param.parent().name() == 'shortcuts':
                         param_index = custom_tree.iter_children(self.settings.child(('shortcuts')), []).index(param.name())
-                        action = self.shortcut_manager.shortcut_params.child(('actions')).children()[param_index].child(('action'))
+                        action = self.shortcut_manager.shortcut_params.child(('actions')).children()[param_index].child(('action')).value()
                         self.activate_shortcut(self.shortcuts[param_index], action, activate=param.value())
 
 
@@ -372,13 +372,18 @@ class BeeActions(QObject):
         import webbrowser
         webbrowser.open(logging.getLoggerClass().root.handlers[0].baseFilename)
 
+    def show_file(self):
+        self.h5saver.flush()
+        self.h5saver.show_file_content()
+
     def create_menu(self, menubar):
         menubar.clear()
 
         # %% create Settings menu
         self.file_menu = menubar.addMenu('File')
-        log_action = self.file_menu.addAction('Show log file')
-        log_action.triggered.connect(self.show_log)
+        self.file_menu.addAction('Show log file', self.show_log)
+        self.file_menu.addAction('Show data file', self.show_file)
+
         self.file_menu.addSeparator()
         quit_action = self.file_menu.addAction('Quit')
         quit_action.triggered.connect(self.quit_fun)
