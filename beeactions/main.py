@@ -7,11 +7,12 @@ from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtCore import Qt, QObject, pyqtSlot, QThread, pyqtSignal, QSize, QTimer, QDateTime, QDate, QTime
 from pyqtgraph.dockarea import Dock
 
-from pymodaq.daq_utils.h5saver import H5Saver
+from pymodaq.daq_utils.h5modules import H5Saver
 from pyqtgraph.parametertree import Parameter, ParameterTree
 from pymodaq.daq_utils import custom_parameter_tree as custom_tree
 
-from pymodaq.daq_utils.daq_utils import DockArea, get_set_local_dir, getLineInfo, select_file
+from pymodaq.daq_utils.daq_utils import get_set_local_dir, getLineInfo
+from pymodaq.daq_utils.gui_utils import DockArea, select_file
 from shortcut_manager import ShortCutManager, shortcut_path
 from pymodaq.daq_utils.chrono_timer import ChronoTimer
 import pickle
@@ -164,6 +165,7 @@ class BeeActions(QObject):
                 shortcut.activated.disconnect()
             except:
                 pass
+
     def create_activated_slot(self, action):
         return lambda: self.log_data(action)
 
